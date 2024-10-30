@@ -1,0 +1,50 @@
+---
+const categories = [
+  {
+    title: "Design",
+    link: "/studios/categories/Design"
+  },
+  {
+    title: "Development",
+    link: "/studios/categories/Development"
+  },
+  {
+    title: "SEO",
+    link: "/studios/categories/Design"
+  },
+  {
+    title: "Wordpress",
+    link: "/studios/categories/Development"
+  },
+  {
+    title: "Recruiting",
+    link: "/studios/categories/Design"
+  },
+  {
+    title: "Email",
+    link: "/studios/categories/Marketing"
+  }
+];
+---
+
+<section>
+  <div class="relative max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+    <div class="text-center">
+      <span class="font-mono text-sm font-medium tracking-tight text-blue-600 uppercase">
+        Categories
+      </span>
+    </div>
+    <div class="relative z-10 text-center grid gap-4 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+      {categories.map((category) => (
+        <a 
+          href={category.link}
+          class="group flex h-full cursor-pointer flex-col bg-white px-5 pb-[30px] pt-6 text-sm transition-all sm:min-h-[250px] md:min-h-[200px] xl:min-h-[250px] justify-center rounded-3xl hover:bg-gradient-to-b bg-gradient-to-b hover:from-blue-500 hover:to-indigo-600 from-gray-50 to-gray-100 duration-400 items-center tilt-card group shadow-box shadow-gray-500/20"
+        >
+          <h3 class="text-2xl font-semibold italic text-blue-950 group-hover:text-white transition-colors">
+            {category.title}
+          </h3>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

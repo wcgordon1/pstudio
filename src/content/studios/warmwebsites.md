@@ -7,7 +7,7 @@ image:
     url: "https://warmwebsites.com/wp-content/uploads/2024/10/Screenshot-2024-10-07-at-9.14.34 AM.png"
     alt: "Warm Websites"
 tags: ["Websites", "Monthly", "One Time"]
-category: ["SEO", "Websites"]
+category: ["SEO", "Development"]
 url: "https://www.warmwebsites.com/"
 features: ["Top Pick", "Studio Approved"]
 price: "$350"

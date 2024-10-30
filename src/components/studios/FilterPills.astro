@@ -8,12 +8,12 @@ const sortedCategories = [...categories].sort();
 
 <div class="flex flex-col gap-4 w-full">
   <div>
-    <p class="font-mono text-xs font-medium mb-2 text-gray-600">Categories:</p>
+    <!-- <p class="font-mono text-xs font-medium mb-2 text-gray-600">Categories:</p> -->
     <div class="flex flex-wrap gap-2">
       {sortedCategories.map((category) => (
         <a
           href={`/studios/categories/${category}`}
-          class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full cursor-pointer transition-all duration-200
+          class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-full cursor-pointer transition-all duration-200
             text-gray-600 
             bg-gray-50 
             ring-1 
@@ -28,7 +28,7 @@ const sortedCategories = [...categories].sort();
   </div>
   
   <div>
-    <p class="font-mono text-xs font-medium mb-2 text-gray-600">Tags:</p>
+    <!-- <p class="font-mono text-xs font-medium mb-2 text-gray-600">Tags:</p> -->
     <div class="flex flex-wrap gap-2">
       {sortedTags.map((tag) => (
         <a
