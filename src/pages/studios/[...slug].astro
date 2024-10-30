@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import CtaOne from "@/components/ctas/CtaOne.astro";
+import { SocialShare } from "astro-social-share";
 
 export async function getStaticPaths() {
   const studios = await getCollection('studios');
@@ -118,19 +119,66 @@ const fallbackImage = "/images/studios/placeholder.png";
         </div>
       </div>
 
+      <!-- Add Social Share Buttons -->
+      <div class="prose prose-blue max-w-3xl mx-auto mt-4 mb-4">
+        <div class="flex items-center justify-center gap-4">
+            <p class="text-xl font-semibold tracking-tight text-blue-950">Share:</p>
+          <!-- Twitter/X Share -->
+          <a 
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${entry.data.title} - ${entry.data.description}`)}&url=${encodeURIComponent(`https://productized.studio/studios/${entry.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center h-10 w-10 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+            <span class="sr-only">Share on X</span>
+          </a>
+
+          <!-- LinkedIn Share -->
+          <a 
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://productized.studio/studios/${entry.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center h-10 w-10 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            <span class="sr-only">Share on LinkedIn</span>
+          </a>
+
+          <!-- Facebook Share -->
+          <a 
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://productized.studio/studios/${entry.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center h-10 w-10 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            <span class="sr-only">Share on Facebook</span>
+          </a>
+
+          <!-- Email Share -->
+          <a 
+            href={`mailto:example@example.com?subject=${encodeURIComponent(`Check out ${entry.data.title} on Productized Studio`)}&body=${encodeURIComponent(`I found this great studio on Productized Studio: https://productized.studio/studios/${entry.slug}`)}`}
+            class="inline-flex items-center justify-center h-10 w-10 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span class="sr-only">Share via Email</span>
+          </a>
+        </div>
+      </div>
+
       <!-- Content -->
       <div class="prose prose-blue max-w-3xl mx-auto mt-12">
         <Content />
         <a
-        href={entry.data.url}
-        rel={entry.data.paid ? "dofollow" : "nofollow"}
-        target="_blank"
-        class="inline-flex mt-6 items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
-      >
-      {entry.data.title} Website
-      </a>
+          href={entry.data.url}
+          rel={entry.data.paid ? "dofollow" : "nofollow"}
+          target="_blank"
+          class="inline-flex mt-6 items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+        >
+          {entry.data.title} Website
+        </a>
       </div>
-      
     </div>
   </section>
   <CtaOne />
