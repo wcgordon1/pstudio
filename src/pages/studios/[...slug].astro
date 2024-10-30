@@ -22,7 +22,22 @@ const fallbackImage = "/images/studios/placeholder.png";
       <div class="ring-gray-200/10 ring-1 p-2 rounded-3xl bg-gradient-to-t from-indigo-50 to-blue-50 max-w-3xl mx-auto">
         <div class="bg-white/90 backdrop-blur-2xl p-8 rounded-2xl shadow-xl ring-gray-200/20 ring-1">
           <div class="relative flex flex-col lg:flex-row justify-between w-full gap-12">
-            <p class="absolute top-0 right-0 font-mono text-xs font-medium text-gray-500 mt-2 mr-2 hover:text-blue-600 cursor-pointer">
+            <p 
+              id="bookmarkBtn"
+              class="absolute top-0 right-0 font-mono text-xs font-medium mt-2 mr-2 cursor-pointer transition-all duration-200 hover:text-blue-600"
+              data-studio={JSON.stringify({
+                slug: entry.slug,
+                title: entry.data.title,
+                description: entry.data.description,
+                image: entry.data.image,
+                tags: entry.data.tags,
+                category: entry.data.category,
+                features: entry.data.features,
+                url: entry.data.url,
+                paid: entry.data.paid,
+                price: entry.data.price,
+              })}
+            >
               bookmark
             </p>
 
@@ -120,3 +135,45 @@ const fallbackImage = "/images/studios/placeholder.png";
   </section>
   <CtaOne />
 </BaseLayout> 
+
+<script>
+  const bookmarkBtn = document.getElementById('bookmarkBtn');
+  
+  function isBookmarked(slug) {
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarkedStudios') || '[]');
+    return bookmarks.some(studio => studio.slug === slug);
+  }
+
+  function toggleBookmark(studioData) {
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarkedStudios') || '[]');
+    const studioExists = bookmarks.some(studio => studio.slug === studioData.slug);
+
+    if (studioExists) {
+      // Remove bookmark
+      bookmarks = bookmarks.filter(studio => studio.slug !== studioData.slug);
+      bookmarkBtn.classList.remove('text-blue-600');
+      bookmarkBtn.textContent = 'bookmark';
+    } else {
+      // Add bookmark
+      bookmarks.push(studioData);
+      bookmarkBtn.classList.add('text-blue-600');
+      bookmarkBtn.textContent = 'Saved!';
+    }
+
+    localStorage.setItem('bookmarkedStudios', JSON.stringify(bookmarks));
+  }
+
+  // Initialize bookmark state
+  if (bookmarkBtn) {
+    const studioData = JSON.parse(bookmarkBtn.dataset.studio);
+    if (isBookmarked(studioData.slug)) {
+      bookmarkBtn.classList.add('text-blue-600');
+      bookmarkBtn.textContent = 'Saved!';
+    }
+
+    // Add click handler
+    bookmarkBtn.addEventListener('click', () => {
+      toggleBookmark(studioData);
+    });
+  }
+</script> 
