@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import CtaOne from "@/components/ctas/CtaOne.astro";
 
 export async function getStaticPaths() {
   const studios = await getCollection('studios');
@@ -31,18 +32,23 @@ const fallbackImage = "/images/studios/placeholder.png";
               <div class="sm:inline-flex space-x-1 w-full">
                 <p class="text-gray-600 text-xs">
                   Created by: {entry.data.author}
-                </p>
+                <!-- 
+                </p> 
                 <span aria-hidden="true" class="text-gray-600">·</span>
                 <div class="flex text-xs text-gray-600">
                   <time datetime={entry.data.pubDate.toISOString()}>
                     {entry.data.pubDate.toLocaleDateString()}
                   </time>
                 </div>
+                 -->
               </div>
               
               <h1 class="text-3xl font-semibold tracking-tight text-blue-950 mt-2">
                 {entry.data.title}
               </h1>
+              <p class="text-sm mt-2 text-blue-600 max-w-xl">
+                <em>Starting at: {entry.data.price}</em>
+              </p>
               
               <p class="text-sm mt-2 text-gray-600 max-w-xl">
                 <em>{entry.data.description}</em>
@@ -108,4 +114,5 @@ const fallbackImage = "/images/studios/placeholder.png";
       
     </div>
   </section>
+  <CtaOne />
 </BaseLayout> 
