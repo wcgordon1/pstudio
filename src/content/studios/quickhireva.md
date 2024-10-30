@@ -6,11 +6,11 @@ author: "Studio Team"
 image:
     url: "https://framerusercontent.com/assets/8gdrrxwoYusn5iTR1cCmKM5Np0U.jpg"
     alt: "QuickHire VA"
-tags: ["VA", "Hiring"]
-category: ["Recruitment"]
+tags: ["Outsourcing", "Hiring"]
+category: ["Recruiting"]
 url: "https://quickhireva.com/"
 features: []
-price: "$499"
+price: "$495"
 paid: false
 order: 30
 ---

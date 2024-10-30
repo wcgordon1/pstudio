@@ -6,11 +6,11 @@ author: "Studio Team"
 image:
     url: "https://cdn.spark.app/media/jobmate/image/jobmate5.png"
     alt: "JobMate"
-tags: ["Jobs", "Recruitment"]
-category: ["Recruitment"]
+tags: ["Jobs", "Recruiting"]
+category: ["Recruiting"]
 url: "https://jobmate.com"
 features: []
-price: "$299"
+price: ""
 paid: false
 order: 25
 ---
