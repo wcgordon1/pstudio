@@ -21,7 +21,11 @@ const fallbackImage = "/images/studios/placeholder.png";
     <div class="px-8 py-6 mx-auto md:px-12 lg:px-32 max-w-7xl lg:py-12">
       <div class="ring-gray-200/10 ring-1 p-2 rounded-3xl bg-gradient-to-t from-indigo-50 to-blue-50 max-w-3xl mx-auto">
         <div class="bg-white/90 backdrop-blur-2xl p-8 rounded-2xl shadow-xl ring-gray-200/20 ring-1">
-          <div class="flex flex-col lg:flex-row justify-between w-full gap-12">
+          <div class="relative flex flex-col lg:flex-row justify-between w-full gap-12">
+            <p class="absolute top-0 right-0 font-mono text-xs font-medium text-gray-500 mt-2 mr-2 hover:text-blue-600 cursor-pointer">
+              bookmark
+            </p>
+
             <img
               class="lg:w-32 h-32 rounded-xl object-cover mt-12"
               src={entry.data.image.url}
@@ -49,7 +53,7 @@ const fallbackImage = "/images/studios/placeholder.png";
               <p class="text-sm mt-2 text-blue-600 max-w-xl">
                 <em>Starting at: {entry.data.price}</em>
               </p>
-              
+
               <p class="text-sm mt-2 text-gray-600 max-w-xl">
                 <em>{entry.data.description}</em>
               </p>
