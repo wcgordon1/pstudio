@@ -25,7 +25,24 @@ const faq = [
     answer: "Each agency profile includes contact information and a brief description of their services. Feel free to reach out to them directly to discuss your project needs.",
   }
 ];
+
+// Create the JSON-LD data structure
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
 ---
+
+<!-- Add the JSON-LD script to the head -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 <section>
   <div class="max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
