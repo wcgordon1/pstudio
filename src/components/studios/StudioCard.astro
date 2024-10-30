@@ -6,13 +6,13 @@ const fallbackImage = "/images/studios/placeholder.png";
 ---
 
 <li 
-  class={`group rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-none studio-card
-    ${paid ? 'shadow-indigo-500/50' : 'shadow-gray-500/20'} shadow-box`}
+  class="group rounded-2xl overflow-hidden shadow-box shadow-gray-500/20 transition-all duration-300 hover:shadow-none studio-card"
   data-title={title}
   data-description={description}
   data-tags={JSON.stringify(tags)}
   data-category={JSON.stringify(category)}
   data-features={JSON.stringify(features)}
+  data-slug={slug}
 >
   <a 
     href={`/studios/${slug}`} 
@@ -30,6 +30,25 @@ const fallbackImage = "/images/studios/placeholder.png";
             ))}
           </div>
         )}
+        <div 
+          class="absolute top-3 right-3 z-10 hidden saved-indicator"
+          data-slug={slug}
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="#FFD700" 
+            stroke="#FFD700" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"
+            class="drop-shadow-md"
+          >
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
         <img
           class="group-hover:scale-105 duration-300 aspect-[2/1] object-cover w-full"
           loading="lazy"
@@ -83,4 +102,29 @@ const fallbackImage = "/images/studios/placeholder.png";
       </div>
     </div>
   </a>
-</li> 
+</li>
+
+<script>
+  // Run once when component loads
+  function checkSavedStatus() {
+    const savedStudios = JSON.parse(localStorage.getItem('bookmarkedStudios') || '[]');
+    const savedSlugs = new Set(savedStudios.map(studio => studio.slug));
+    
+    document.querySelectorAll('.saved-indicator').forEach(indicator => {
+      const slug = indicator.getAttribute('data-slug');
+      if (savedSlugs.has(slug)) {
+        indicator.classList.remove('hidden');
+      }
+    });
+  }
+
+  // Check saved status on load
+  document.addEventListener('DOMContentLoaded', checkSavedStatus);
+
+  // Listen for changes to bookmarks
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'bookmarkedStudios') {
+      checkSavedStatus();
+    }
+  });
+</script> 

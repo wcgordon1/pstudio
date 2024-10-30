@@ -11,7 +11,7 @@ category: ["Recruiting"]
 url: "https://jobmate.com"
 features: []
 price: ""
-paid: false
+paid: true
 order: 25
 ---
 
