@@ -1,0 +1,85 @@
+---
+const { title, description, image, tags, category, features, url, paid, price, slug } = Astro.props;
+
+// Fallback image if the provided image fails to load
+const fallbackImage = "/images/studios/placeholder.png";
+---
+
+<li 
+  class="group rounded-2xl overflow-hidden shadow-box shadow-gray-500/20 transition-all duration-300 hover:shadow-none studio-card"
+  data-title={title}
+  data-description={description}
+  data-tags={JSON.stringify(tags)}
+  data-category={JSON.stringify(category)}
+  data-features={JSON.stringify(features)}
+>
+  <a 
+    href={`/studios/${slug}`} 
+    title={title} 
+    aria-label={title}
+  >
+    <div class="bg-white">
+      <div class="relative flex items-end justify-center overflow-hidden border-b border-gray-100">
+        {features && features.length > 0 && (
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1 z-10">
+            {features.map((feature) => (
+              <span class="px-2 py-1 text-xs font-medium text-white rounded-full bg-gradient-to-b from-blue-500 to-indigo-600">
+                {feature}
+              </span>
+            ))}
+          </div>
+        )}
+        <img
+          class="group-hover:scale-105 duration-300 aspect-[2/1] object-cover w-full"
+          loading="lazy"
+          src={image.url}
+          alt={image.alt}
+          width="560"
+          onerror={`this.onerror=null; this.src='${fallbackImage}'`}
+        />
+      </div>
+
+      <div class="p-4">
+        {tags && tags.length > 0 && (
+          <div class="flex flex-wrap gap-1">
+            {tags.map((tag) => (
+              <a 
+                href={`/studios/tags/${tag}`}
+                class="inline-flex items-center px-2 py-0.5 text-xs font-medium text-gray-600 transition-all rounded-full bg-gray-50 ring-1 ring-inset ring-gray-500/10 hover:text-blue-600"
+                onclick="event.stopPropagation()"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        )}
+        
+        <h3 class="mt-3 text-lg font-semibold tracking-tight text-blue-950">
+          {title}
+        </h3>
+        <p class="mt-1 text-sm text-gray-600 line-clamp-2">
+          {description}
+        </p>
+
+        {category && (
+          <div class="mt-2 flex items-center justify-between">
+            <div class="flex gap-2">
+              {category.map((cat) => (
+                <a 
+                  href={`/studios/categories/${cat}`}
+                  class="text-xs font-mono uppercase text-blue-600 hover:text-blue-800"
+                  onclick="event.stopPropagation()"
+                >
+                  {cat}
+                </a>
+              ))}
+            </div>
+            <span class="text-xs font-medium text-gray-600">
+              {price}
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  </a>
+</li> 

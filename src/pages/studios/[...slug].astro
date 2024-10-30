@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const studios = await getCollection('studios');
+  return studios.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const fallbackImage = "/images/studios/placeholder.png";
+---
+
+<BaseLayout>
+  <section>
+    <div class="px-8 py-6 mx-auto md:px-12 lg:px-32 max-w-7xl lg:py-12">
+      <div class="ring-gray-200/10 ring-1 p-2 rounded-3xl bg-gradient-to-t from-indigo-50 to-blue-50 max-w-3xl mx-auto">
+        <div class="bg-white/90 backdrop-blur-2xl p-8 rounded-2xl shadow-xl ring-gray-200/20 ring-1">
+          <div class="flex flex-col lg:flex-row justify-between w-full gap-12">
+            <img
+              class="lg:w-32 h-32 rounded-xl object-cover mt-12"
+              src={entry.data.image.url}
+              alt={entry.data.image.alt}
+              onerror={`this.onerror=null; this.src='${fallbackImage}'`}
+            />
+            <div class="mt-4 flex-1">
+              <div class="sm:inline-flex space-x-1 w-full">
+                <p class="text-gray-600 text-xs">
+                  Created by: {entry.data.author}
+                </p>
+                <span aria-hidden="true" class="text-gray-600">·</span>
+                <div class="flex text-xs text-gray-600">
+                  <time datetime={entry.data.pubDate.toISOString()}>
+                    {entry.data.pubDate.toLocaleDateString()}
+                  </time>
+                </div>
+              </div>
+              
+              <h1 class="text-3xl font-semibold tracking-tight text-blue-950 mt-2">
+                {entry.data.title}
+              </h1>
+              
+              <p class="text-sm mt-2 text-gray-600 max-w-xl">
+                <em>{entry.data.description}</em>
+              </p>
+
+              <!-- Categories -->
+              <div class="flex flex-wrap gap-2 mt-4">
+                {entry.data.category.map((cat) => (
+                  <a href={`/studios/categories/${cat}`}>
+                    <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full cursor-pointer transition-all duration-200 text-gray-600 bg-gray-50 ring-1 ring-inset ring-gray-500/10 hover:text-blue-600">
+                      {cat}
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              <!-- Tags -->
+              <ul class="flex flex-wrap gap-2 mt-4" role="list">
+                {entry.data.tags.map((tag) => (
+                  <a href={`/studios/tags/${tag}`}>
+                    <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full cursor-pointer transition-all duration-200 text-gray-600 bg-gray-50 ring-1 ring-inset ring-gray-500/10 hover:text-blue-600">
+                      {tag}
+                    </span>
+                  </a>
+                ))}
+              </ul>
+
+              <!-- Features 
+              <div class="flex flex-wrap gap-2 mt-4">
+                {entry.data.features.map((feature) => (
+                  <span class="inline-flex items-center px-3 py-1 text-xs font-medium text-white rounded-full bg-gradient-to-b from-blue-500 to-indigo-600">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+-->
+              <!-- CTA Button -->
+              <a
+                href={entry.data.url}
+                rel={entry.data.paid ? "dofollow" : "nofollow"}
+                target="_blank"
+                class="inline-flex mt-6 items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none md:w-full"
+              >
+                Visit {entry.data.title} →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="prose prose-blue max-w-3xl mx-auto mt-12">
+        <Content />
+        <a
+        href={entry.data.url}
+        rel={entry.data.paid ? "dofollow" : "nofollow"}
+        target="_blank"
+        class="inline-flex mt-6 items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+      >
+      {entry.data.title} Website
+      </a>
+      </div>
+      
+    </div>
+  </section>
+</BaseLayout> 

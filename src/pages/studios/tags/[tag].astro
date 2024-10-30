@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import StudioCard from "@/components/studios/StudioCard.astro";
+
+export async function getStaticPaths() {
+  const allStudios = await getCollection("studios");
+  const uniqueTags = [...new Set(allStudios.flatMap(studio => studio.data.tags))];
+
+  return uniqueTags.map((tag) => {
+    const filteredStudios = allStudios.filter((studio) =>
+      studio.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { tag, studios: filteredStudios },
+    };
+  });
+}
+
+const { tag, studios } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <div class="max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+      <div class="max-w-xl mx-auto text-center">
+        <span class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase">
+          Tag
+        </span>
+        <h1 class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950">
+          Studios tagged with {tag}
+        </h1>
+      </div>
+    </div>
+
+    <div class="max-w-[1920px] px-4 mx-auto md:px-8 lg:px-12">
+      <ul class="grid grid-cols-1 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6">
+        {studios.map((studio) => (
+          <StudioCard 
+            title={studio.data.title}
+            description={studio.data.description}
+            image={studio.data.image}
+            tags={studio.data.tags}
+            category={studio.data.category}
+            features={studio.data.features}
+            url={studio.data.url}
+            paid={studio.data.paid}
+            slug={studio.slug}
+          />
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout> 

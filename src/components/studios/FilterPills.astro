@@ -1,0 +1,45 @@
+---
+const { tags, categories } = Astro.props;
+---
+
+<div class="flex flex-col gap-4 w-full">
+  <div>
+    <p class="font-mono text-xs font-medium mb-2 text-gray-600">Categories:</p>
+    <div class="flex flex-wrap gap-2">
+      {categories.map((category) => (
+        <a
+          href={`/studios/categories/${category}`}
+          class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full cursor-pointer transition-all duration-200
+            text-gray-600 
+            bg-gray-50 
+            ring-1 
+            ring-inset 
+            ring-gray-500/10
+            hover:text-blue-600"
+        >
+          {category}
+        </a>
+      ))}
+    </div>
+  </div>
+  
+  <div>
+    <p class="font-mono text-xs font-medium mb-2 text-gray-600">Tags:</p>
+    <div class="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <a
+          href={`/studios/tags/${tag}`}
+          class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full cursor-pointer transition-all duration-200
+            text-gray-600 
+            bg-gray-50 
+            ring-1 
+            ring-inset 
+            ring-gray-500/10
+            hover:text-blue-600"
+        >
+          {tag}
+        </a>
+      ))}
+    </div>
+  </div>
+</div> 

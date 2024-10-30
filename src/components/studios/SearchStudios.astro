@@ -1,0 +1,70 @@
+---
+const { allStudios } = Astro.props;
+---
+
+<div class="w-full p-2 mt-8 rounded-2xl lg:rounded-full sm:flex mx-auto max-w-sm bg-white shadow-box shadow-gray-500/20">
+  <div class="relative flex w-full gap-2">
+    <input
+      type="text"
+      id="studioSearch"
+      class="block w-full h-10 px-4 py-2 text-sm text-blue-700 border border-transparent appearance-none rounded-xl lg:rounded-full bg-gray-50 placeholder-gray-700 focus:border-gray-500 focus:bg-transparent focus:outline-none focus:ring-indigo-300 sm:text-sm transition-all duration-200"
+      placeholder="Search studios..."
+    />
+    <button
+      id="clearSearch"
+      class="hidden shrink-0 h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none whitespace-nowrap"
+    >
+      Clear
+    </button>
+  </div>
+</div>
+
+<script>
+  const searchInput = document.getElementById('studioSearch') as HTMLInputElement;
+  const clearButton = document.getElementById('clearSearch');
+  const studioCards = document.querySelectorAll('.studio-card');
+
+  function searchStudios(searchTerm: string) {
+    if (searchTerm.length < 2) {
+      studioCards.forEach(card => {
+        (card as HTMLElement).style.display = '';
+      });
+      clearButton?.classList.add('hidden');
+      return;
+    }
+
+    clearButton?.classList.remove('hidden');
+    const searchTermLower = searchTerm.toLowerCase();
+
+    studioCards.forEach(card => {
+      const title = card.getAttribute('data-title')?.toLowerCase() || '';
+      const description = card.getAttribute('data-description')?.toLowerCase() || '';
+      const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
+      const category = JSON.parse(card.getAttribute('data-category') || '[]');
+      const features = JSON.parse(card.getAttribute('data-features') || '[]');
+
+      const matches = 
+        title.includes(searchTermLower) ||
+        description.includes(searchTermLower) ||
+        tags.some((tag: string) => tag.toLowerCase().includes(searchTermLower)) ||
+        category.some((cat: string) => cat.toLowerCase().includes(searchTermLower)) ||
+        features.some((feature: string) => feature.toLowerCase().includes(searchTermLower));
+
+      (card as HTMLElement).style.display = matches ? '' : 'none';
+    });
+  }
+
+  function clearSearch() {
+    if (searchInput) {
+      searchInput.value = '';
+      searchStudios('');
+    }
+  }
+
+  searchInput?.addEventListener('input', (e) => {
+    const searchTerm = (e.target as HTMLInputElement).value;
+    searchStudios(searchTerm);
+  });
+
+  clearButton?.addEventListener('click', clearSearch);
+</script> 

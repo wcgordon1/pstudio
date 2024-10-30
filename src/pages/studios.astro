@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import StudioCard from "@/components/studios/StudioCard.astro";
+import FilterPills from "@/components/studios/FilterPills.astro";
+import SearchStudios from "@/components/studios/SearchStudios.astro";
+
+// Get all studios from content collection
+const allStudios = await getCollection("studios");
+// Sort by order field
+const sortedStudios = allStudios.sort((a, b) => a.data.order - b.data.order);
+
+// Get unique tags and categories
+const tags = [...new Set(allStudios.flatMap((studio) => studio.data.tags))];
+const categories = [...new Set(allStudios.flatMap((studio) => studio.data.category))];
+---
+
+<BaseLayout>
+  <section>
+    <!-- Header section with original max-width and padding -->
+    <div class="max-w-screen-xl px-8 pt-12 pb-6 mx-auto md:px-12 lg:px-32">
+      <div class="max-w-xl mx-auto text-center">
+        <span class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase">
+          Productized Studio
+        </span>
+        <h1 class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950">
+          Studio Directory
+        </h1>
+        
+        <SearchStudios allStudios={sortedStudios} />
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="flex flex-wrap gap-4 mt-8 mx-auto md:justify-between max-w-4xl">
+        <FilterPills tags={tags} categories={categories} />
+      </div>
+    </div>
+
+    <!-- Studios Grid with adjusted width and spacing -->
+    <div class="max-w-[1920px] px-4 mx-auto md:px-8 lg:px-12">
+      <ul class="grid grid-cols-1 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6">
+        {sortedStudios.map((studio) => (
+          <StudioCard 
+            title={studio.data.title}
+            description={studio.data.description}
+            image={studio.data.image}
+            tags={studio.data.tags}
+            category={studio.data.category}
+            features={studio.data.features}
+            url={studio.data.url}
+            paid={studio.data.paid}
+            price={studio.data.price}
+            slug={studio.slug}
+          />
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

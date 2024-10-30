@@ -1,0 +1,32 @@
+<div
+  x-cloak
+  x-show="showAlert"
+  x-data="{ showAlert: true }"
+  role="alert"
+  class="w-full bg-gradient-to-t from-blue-500 to-indigo-600 text-white"
+>
+  <div class="flex items-center justify-between gap-4 w-full h-12 px-8 mx-auto md:px-12 lg:px-32 max-w-screen-xl">
+    <div class="text-xs font-medium">
+      This Banner is available to customize and sponsor.
+    </div>
+    <button
+      @click="showAlert = false"
+      class="underline bg-white/10 ring-1 ring-white/50 text-white focus:bg-white focus:text-blue-700 hover:bg-white hover:text-blue-950 rounded-full p-0.5"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-x w-4 h-4"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M18 6l-12 12"></path>
+        <path d="M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</div> 

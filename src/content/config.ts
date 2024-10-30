@@ -45,10 +45,31 @@ const postsCollection = defineCollection({
     tags: z.array(z.string()),
   }),
 });
+const studiosCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    author: z.string(),
+    image: z.object({
+      url: z.string(),
+      alt: z.string(),
+    }),
+    tags: z.array(z.string()),
+    category: z.array(z.string()),
+    url: z.string().url(),
+    features: z.array(z.string()),
+    paid: z.boolean(),
+    price: z.string(),
+    order: z.number(),
+  }),
+});
 export const collections = {
   helpcenter: helpcenter,
   changelog: changelog,
   infopages: infopages,
   customers: customers,
   posts: postsCollection,
+  studios: studiosCollection,
 };
