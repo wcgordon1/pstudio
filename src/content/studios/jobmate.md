@@ -6,7 +6,7 @@ author: "Studio Team"
 image:
     url: "https://cdn.spark.app/media/jobmate/image/jobmate5.png"
     alt: "JobMate"
-tags: ["Jobs", "Recruiting"]
+tags: ["Hiring", "Recurring"]
 category: ["Recruiting"]
 url: "https://jobmate.com"
 features: []

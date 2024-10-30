@@ -6,7 +6,7 @@ author: "Studio Team"
 image:
     url: "https://framerusercontent.com/assets/8gdrrxwoYusn5iTR1cCmKM5Np0U.jpg"
     alt: "QuickHire VA"
-tags: ["Outsourcing", "Hiring"]
+tags: ["One Time", "Hiring"]
 category: ["Recruiting"]
 url: "https://quickhireva.com/"
 features: []

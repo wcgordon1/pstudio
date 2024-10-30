@@ -1,13 +1,13 @@
 ---
 title: "Warm Websites"
-description: "BlogJoy is a platform that allows you to create, manage, and publish your own blogs with ease. It's a simple and intuitive tool that makes blogging accessible to everyone."
+description: "Decades of SaaS experience and proven business success. We’ve built, scaled, and sold companies, and now we use that expertise to craft high-performing, affordable websites tailored to help your business thrive"
 pubDate: 2024-10-30
 author: "Studio Team"
 image:
     url: "https://warmwebsites.com/wp-content/uploads/2024/10/Screenshot-2024-10-07-at-9.14.34 AM.png"
     alt: "Warm Websites"
-tags: ["Websites", "Monthly", "One Time"]
-category: ["SEO", "Development"]
+tags: ["Websites", "Recurring", "One Time"]
+category: ["Development", "SEO"]
 url: "https://www.warmwebsites.com/"
 features: ["Top Pick", "Studio Approved"]
 price: "$350"

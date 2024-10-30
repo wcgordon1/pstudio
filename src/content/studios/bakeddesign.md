@@ -6,7 +6,7 @@ author: "Studio Team"
 image:
     url: "https://framerusercontent.com/images/yje5dDVGuKXoYj24r1Hct6Q9uI.png"
     alt: "Baked Design Hero"
-tags: ["Design", "Figma", "Framer"]
+tags: ["Recurring", "Figma", "Framer"]
 category: ["Design"]
 url: "https://baked.design"
 features: []

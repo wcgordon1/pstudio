@@ -6,7 +6,7 @@ author: "Studio Team"
 image:
     url: "https://framerusercontent.com/assets/CtayldgmpX8nzMxb4CgmC33eB8.png"
     alt: "BlogJoy Screenshot"
-tags: ["Content", "Blogs"]
+tags: ["Content", "Blogs", "Recurring"]
 category: ["SEO"]
 url: "https://www.blogjoy.co/"
 features: []
