@@ -23,9 +23,18 @@ export async function getStaticPaths() {
 const { category, studios } = Astro.props;
 const tags = [...new Set(studios.flatMap((studio) => studio.data.tags))];
 const categories = [...new Set(studios.flatMap((studio) => studio.data.category))];
+
+const meta = {
+  title: `${category} Studios`,
+  description: `Browse our collection of ${category.toLowerCase()} studios and agencies. Find the perfect ${category.toLowerCase()} studio for your needs.`,
+  url: Astro.url,
+  socialImage: "/social.jpg",
+  twitterImage: "/twitter.jpg",
+  author: "Productized Studio"
+};
 ---
 
-<BaseLayout>
+<BaseLayout {...meta}>
   <section>
     <!-- Header section with original max-width and padding -->
     <div class="max-w-screen-xl px-8 pt-12 pb-6 mx-auto md:px-12 lg:px-32">

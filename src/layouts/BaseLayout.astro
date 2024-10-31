@@ -3,11 +3,27 @@ import BaseHead from "@/components/BaseHead.astro";
 import Banner from "@/components/global/Banner.astro";
 import Navigation from "@/components/global/Navigation.astro";
 import Footer from "@/components/global/Footer.astro";
+
+const { 
+  title,
+  description,
+  url,
+  socialImage,
+  twitterImage,
+  author
+} = Astro.props;
 ---
 
 <html lang="en" class="scroll-smooth">
   <head>
-    <BaseHead />
+    <BaseHead 
+      title={title}
+      description={description}
+      url={url}
+      socialImage={socialImage}
+      twitterImage={twitterImage}
+      author={author}
+    />
   </head>
   <body
     class="bg-gray-100 flex flex-col min-h-screen mx-auto 2xl:max-w-screen-4xl"

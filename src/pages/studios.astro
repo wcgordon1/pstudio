@@ -13,9 +13,18 @@ const sortedStudios = allStudios.sort((a, b) => a.data.order - b.data.order);
 // Get unique tags and categories
 const tags = [...new Set(allStudios.flatMap((studio) => studio.data.tags))].sort();
 const categories = [...new Set(allStudios.flatMap((studio) => studio.data.category))].sort();
+
+const meta = {
+  title: "Productized Studio Directory",
+  description: "Browse our curated collection of productized service agencies. Find the perfect productized service agency for your business needs.",
+  url: Astro.url,
+  socialImage: "/social.jpg",
+  twitterImage: "/twitter.jpg",
+  author: "Productized Studio"
+};
 ---
 
-<BaseLayout>
+<BaseLayout {...meta}>
   <section>
     <!-- Header section with original max-width and padding -->
     <div class="max-w-screen-xl px-8 pt-12 pb-6 mx-auto md:px-12 lg:px-32">

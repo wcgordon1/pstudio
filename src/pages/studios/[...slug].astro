@@ -2,8 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import CtaOne from "@/components/ctas/CtaOne.astro";
-import { SocialShare } from "astro-social-share";
-import Metas from "@/components/seo/Metas.astro";
 
 export async function getStaticPaths() {
   const studios = await getCollection('studios');
@@ -15,11 +13,22 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Add fallback image path
 const fallbackImage = "/images/studios/placeholder.png";
+
+// Create meta object for the studio page
+const meta = {
+  title: `${entry.data.title} - Productized Service Agencies`,
+  description: entry.data.description.slice(0, 160), // Limit description to 160 characters
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  socialImage: entry.data.image.url,
+  twitterImage: entry.data.image.url,
+  author: entry.data.author
+};
 ---
 
-<BaseLayout>
-  <Metas title={entry.data.title} description={entry.data.description} />
+<BaseLayout {...meta}>
   <section>
     <div class="px-8 py-6 mx-auto md:px-12 lg:px-32 max-w-7xl lg:py-12">
       <div class="ring-gray-200/10 ring-1 p-2 rounded-3xl bg-gradient-to-t from-indigo-50 to-blue-50 max-w-3xl mx-auto">
